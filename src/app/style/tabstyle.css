@@ -19,16 +19,30 @@
     max-width: calc( 100vw - 20px );
     width: 100vw;
     height: 100%;
-    padding: 10px;
-    background-color: rgba(211, 211, 211, 0.514);;
+    padding: 0 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.tab-title {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: rgba(211, 211, 211, 0.514);;
+}
+h2 {
+    margin: 0;
+    padding: 5px;
+    font-size: 20px;
+    color: #333;
+}
 .reply-tab-contents {
+    margin-top: 5px;
     justify-content: space-between;
     display: flex;
+    height: 88vh;
 }
+
 .memo-tab-contents {
     display: flex;
     flex-direction: column;
+    height: 88vh;
 }
