@@ -1,0 +1,34 @@
+.tab {
+    width: 100px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tab:hover {
+    background-color: lightgray;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    color: black;
+}
+.tab.selected {
+    background: transparent;
+    background-color: rgba(211, 211, 211, 0.514);
+}
+.tab-contents {
+    max-width: calc( 100vw - 20px );
+    width: 100vw;
+    height: 100%;
+    padding: 10px;
+    background-color: rgba(211, 211, 211, 0.514);;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.reply-tab-contents {
+    justify-content: space-between;
+    display: flex;
+}
+.memo-tab-contents {
+    display: flex;
+    flex-direction: column;
+}

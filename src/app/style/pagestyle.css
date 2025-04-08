@@ -1,0 +1,96 @@
+.title {
+    align-items: center;
+    margin-bottom: 20px;
+}
+textarea {
+    width: 60vw;
+    height: 400px;
+    display: block;
+}
+#memo-textarea1 {
+    max-height:40vh;
+}
+#memo-textarea2 {
+    max-height:15vh;
+}
+#memo-textarea3 {
+    max-height:15vh;
+}
+#clientname {
+    width: 80px;
+}
+.maintemp {
+    width: calc( 70% - 20px );
+}
+.sidebar {
+    justify-content: space-around;
+    width: 30%;
+}
+input[type="text"] {
+    width: 80px;
+    padding: 3px;
+    display: flex;
+}
+.greeting {
+    display: flex;
+}
+#greeting {
+    margin: 10px 0;
+    padding: 5px;
+    width: 500px;
+}
+.signature{
+    display: flex;
+}
+#spname {
+    width: 450px;
+    display: flex;
+}
+#answer {
+    padding: 5px;
+    width: 100%;
+    height: 60vh;
+    display: block;
+    margin: 0 10px 20px 0;
+}
+ul {
+    margin: 0;
+    padding: 0;
+}
+li {
+    display: inline-block;
+    text-decoration: none;
+}
+button {
+    width: 200px;
+    height: 40px;
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: #fff;
+    border: 1px solid #000;
+}
+button:hover {
+    cursor: pointer;
+    background-color: #000;
+    color: #fff;
+}
+.sidecontain {
+    height: 89vh;
+    overflow-y: scroll;
+}
+.sidebar li {
+    width: 100%;
+    border: 1px solid #000;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.sidebar li:nth-child(2n) {
+    background-color: #f0f0f0;
+}
+.template {
+    padding: 10px;
+    width: 100%;
+}
+.aside-button {
+    width: 100%;
+}
