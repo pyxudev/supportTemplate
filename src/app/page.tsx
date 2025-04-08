@@ -348,7 +348,7 @@ function Reply() {
                                 @Matt Zinner<br /> 
                                 Hi Matt, <br /><br />
                                 
-                                Thank you for addressing our clients' upgrade requests.<br />
+                                Thank you for addressing our clients&apos; upgrade requests.<br />
                                 [Clientname] requests AQX upgrade. <br />
                                 Could you please check the request? <br /><br />
                                 
