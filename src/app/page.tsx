@@ -122,7 +122,7 @@ export default function Home() {
 
     return (
         <>
-            <ul>
+            <ul className='tab-list'>
                 <li>
                     <div className={`MemoTab tab ${activeTab === 'tab1' && 'selected'}`} onClick={() => setActiveTab('tab1')}>
                         Memo

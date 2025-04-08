@@ -32,6 +32,7 @@ input[type="text"] {
 }
 .greeting {
     display: flex;
+    margin-top: 5px;
 }
 #greeting {
     margin: 10px 0;
@@ -74,7 +75,7 @@ button:hover {
     color: #fff;
 }
 .sidecontain {
-    height: 88vh;
+    height: calc(88vh - 1px);
     overflow-y: scroll;
 }
 .sidebar li {

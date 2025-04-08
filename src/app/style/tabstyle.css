@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid #ccc;
 }
 .tab:hover {
     background-color: lightgray;
@@ -14,6 +15,9 @@
 .tab.selected {
     background: transparent;
     background-color: rgba(211, 211, 211, 0.514);
+}
+.tab-list {
+    margin-left: 10px;
 }
 .tab-contents {
     max-width: calc( 100vw - 20px );
@@ -26,7 +30,8 @@
 .tab-title {
     padding-top: 5px;
     padding-bottom: 5px;
-    background-color: rgba(211, 211, 211, 0.514);;
+    background-color: rgba(211, 211, 211, 0.514);
+    border: 1px solid #ccc;
 }
 h2 {
     margin: 0;
@@ -35,14 +40,15 @@ h2 {
     color: #333;
 }
 .reply-tab-contents {
-    margin-top: 5px;
     justify-content: space-between;
     display: flex;
     height: 88vh;
+    border: 1px solid #ccc;
 }
 
 .memo-tab-contents {
     display: flex;
     flex-direction: column;
     height: 88vh;
+    border: 1px solid #ccc;
 }
