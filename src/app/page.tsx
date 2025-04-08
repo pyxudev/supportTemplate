@@ -15,31 +15,31 @@ export default function Home() {
 
     if (typeof window !== 'undefined') {
         window.onload = function() {
-            let invstp = localStorage.getItem('invstp');
-            let cosd = localStorage.getItem('cosd');
-            let nxtstp = localStorage.getItem('nxtstp');
+            const invstp = localStorage.getItem('invstp');
+            const cosd = localStorage.getItem('cosd');
+            const nxtstp = localStorage.getItem('nxtstp');
 
-            let lsname = localStorage.getItem('usrname');
-            let lscompname = localStorage.getItem('compname');
-            let lssimpname = localStorage.getItem('simpname');
-            let lsgreeting = localStorage.getItem('greeting');
-            let lsanswer = localStorage.getItem('answer');
-            let lsuse = localStorage.getItem('use');
-            let lsisEn = localStorage.getItem('isEn');
-            let lsspname = localStorage.getItem('spname');
+            const lsname = localStorage.getItem('usrname');
+            const lscompname = localStorage.getItem('compname');
+            const lssimpname = localStorage.getItem('simpname');
+            const lsgreeting = localStorage.getItem('greeting');
+            const lsanswer = localStorage.getItem('answer');
+            const lsuse = localStorage.getItem('use');
+            const lsisEn = localStorage.getItem('isEn');
+            const lsspname = localStorage.getItem('spname');
 
-            let step1: HTMLInputElement = document.getElementById("memo-textarea1") as HTMLInputElement;
-            let step2: HTMLInputElement = document.getElementById("memo-textarea2") as HTMLInputElement;
-            let step3: HTMLInputElement = document.getElementById("memo-textarea3") as HTMLInputElement;
+            const step1: HTMLInputElement = document.getElementById("memo-textarea1") as HTMLInputElement;
+            const step2: HTMLInputElement = document.getElementById("memo-textarea2") as HTMLInputElement;
+            const step3: HTMLInputElement = document.getElementById("memo-textarea3") as HTMLInputElement;
 
-            let name = document.getElementById("clientname") as HTMLInputElement;
-            let compname = document.getElementById("compname") as HTMLInputElement;
-            let simpname = document.getElementById("simpname") as HTMLInputElement;
-            let greeting = document.getElementById("greeting") as HTMLInputElement;
-            let answer = document.getElementById("answer") as HTMLInputElement;
-            let use = document.getElementById("use") as HTMLInputElement;
-            let isEn = document.getElementById("isEn") as HTMLInputElement;
-            let spname = document.getElementById("spname") as HTMLInputElement;
+            const name = document.getElementById("clientname") as HTMLInputElement;
+            const compname = document.getElementById("compname") as HTMLInputElement;
+            const simpname = document.getElementById("simpname") as HTMLInputElement;
+            const greeting = document.getElementById("greeting") as HTMLInputElement;
+            const answer = document.getElementById("answer") as HTMLInputElement;
+            const use = document.getElementById("use") as HTMLInputElement;
+            const isEn = document.getElementById("isEn") as HTMLInputElement;
+            const spname = document.getElementById("spname") as HTMLInputElement;
 
             if (invstp) {
                 step1.value = invstp;
@@ -77,17 +77,17 @@ export default function Home() {
         }
 
         window.addEventListener('beforeunload', function() {
-            let invstp = document.getElementsByTagName("textarea")[0].value;
-            let cosd = document.getElementsByTagName("textarea")[1].value;
-            let nxtstp = document.getElementsByTagName("textarea")[2].value;
-            let name = document.getElementById("clientname") as HTMLInputElement;
-            let compname = document.getElementById("compname") as HTMLInputElement;
-            let simpname = document.getElementById("simpname") as HTMLInputElement;
-            let greeting = document.getElementById("greeting") as HTMLInputElement;
-            let answer = document.getElementById("answer") as HTMLInputElement;
-            let use = document.getElementById("use") as HTMLInputElement;
-            let isEn = document.getElementById("isEn") as HTMLInputElement;
-            let spname = document.getElementById("spname") as HTMLInputElement;
+            const invstp = document.getElementsByTagName("textarea")[0].value;
+            const cosd = document.getElementsByTagName("textarea")[1].value;
+            const nxtstp = document.getElementsByTagName("textarea")[2].value;
+            const name = document.getElementById("clientname") as HTMLInputElement;
+            const compname = document.getElementById("compname") as HTMLInputElement;
+            const simpname = document.getElementById("simpname") as HTMLInputElement;
+            const greeting = document.getElementById("greeting") as HTMLInputElement;
+            const answer = document.getElementById("answer") as HTMLInputElement;
+            const use = document.getElementById("use") as HTMLInputElement;
+            const isEn = document.getElementById("isEn") as HTMLInputElement;
+            const spname = document.getElementById("spname") as HTMLInputElement;
 
             localStorage.setItem('invstp', invstp);
             localStorage.setItem('cosd', cosd);
@@ -117,9 +117,9 @@ export default function Home() {
         for ( let i=0; i<copybuttons.length; i++) {
             copybuttons[i].addEventListener('click', function(event) {
                 if (event.target){                    
-                    let target = event.target as HTMLElement;
-                    let li = target.parentNode;
-                    let templates = li?.querySelector('.template') as HTMLElement;
+                    const target = event.target as HTMLElement;
+                    const li = target.parentNode;
+                    const templates = li?.querySelector('.template') as HTMLElement;
                     const template = templates.innerText;
                     navigator.clipboard.writeText(template);
                 }
@@ -156,8 +156,8 @@ function Memo() {
     }
     function memoCopyFunc() {
         let copyText = "#### [Internal Investigating Memo]\n";
-        let textArea = document.getElementsByTagName("textarea");
-        let textList = ["#### Investigations:", "#### Considerations:", "#### Conclusion and next steps:"];
+        const textArea = document.getElementsByTagName("textarea");
+        const textList = ["#### Investigations:", "#### Considerations:", "#### Conclusion and next steps:"];
         for (let i = 0; i< 3; i++) {
             copyText += textList[i] + "\n" + textArea[i].value + "\n";
         }
@@ -191,11 +191,11 @@ function Memo() {
 }
 function Reply() {
     function replyClearFunc() {
-        let name = document.getElementById("clientname") as HTMLInputElement;
-        let greeting = document.getElementById("greeting") as HTMLInputElement;
-        let answer = document.getElementById("answer") as HTMLInputElement;
-        let use = document.getElementById("use") as HTMLInputElement;
-        let isEn = document.getElementById("isEn") as HTMLInputElement;
+        const name = document.getElementById("clientname") as HTMLInputElement;
+        const greeting = document.getElementById("greeting") as HTMLInputElement;
+        const answer = document.getElementById("answer") as HTMLInputElement;
+        const use = document.getElementById("use") as HTMLInputElement;
+        const isEn = document.getElementById("isEn") as HTMLInputElement;
 
         name.value = "";
         greeting.value = "お問い合わせいただき、誠にありがとうございます。";
@@ -204,14 +204,14 @@ function Reply() {
         isEn.checked = false;
     }
     function replyCopyFunc() {
-        let name = document.getElementById("clientname") as HTMLInputElement;
-        let compname = document.getElementById("compname") as HTMLInputElement;
-        let simpname = document.getElementById("simpname") as HTMLInputElement;
-        let greeting = document.getElementById("greeting") as HTMLInputElement;
-        let answer = document.getElementById("answer") as HTMLInputElement;
-        let use = document.getElementById("use") as HTMLInputElement;
-        let isEn = document.getElementById("isEn") as HTMLInputElement;
-        let spname = document.getElementById("spname") as HTMLInputElement;
+        const name = document.getElementById("clientname") as HTMLInputElement;
+        const compname = document.getElementById("compname") as HTMLInputElement;
+        const simpname = document.getElementById("simpname") as HTMLInputElement;
+        const greeting = document.getElementById("greeting") as HTMLInputElement;
+        const answer = document.getElementById("answer") as HTMLInputElement;
+        const use = document.getElementById("use") as HTMLInputElement;
+        const isEn = document.getElementById("isEn") as HTMLInputElement;
+        const spname = document.getElementById("spname") as HTMLInputElement;
         let intcom = "";
         let copyText = "";
         if (use.checked) {
@@ -219,7 +219,7 @@ function Reply() {
         }
         if (isEn.checked) {
             copyText = intcom + "Hello " + name.value + ",\n\n" + 'Thank you for reaching out to us regarding the issue.\n\n' 
-            + answer.value + "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
+            + answer.value + "\n\nIf you have any further question, please feel free to const us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
         } else {
             copyText = intcom + name.value + " 様\n\n" + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greeting.value + "\n\n" + answer.value + "\n\nご不明な点等ございましたらお知らせください。\n何卒よろしくお願いいたします。\n\n" + spname.value;
         }
