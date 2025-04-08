@@ -290,7 +290,7 @@ function Reply() {
                                 現在ご提示のエラーについての調査にあたって、以下の情報をご提供お願いいたします。<br />
                                 1. 事象発生レコード：<br />
                                 2. 事象再現手順：<br />
-                                ※AQX へログイン後の事象発生まで各画面での操作手順を可能な限り詳細にお願いいたします。<br /><br />
+                                ※ログイン後の事象発生まで各画面での操作手順を可能な限り詳細にお願いいたします。<br /><br />
                                 
                                 大変お手数ですが、より正確な回答をするために上記情報をご提示いただけますと幸いです。
                             </div>
@@ -299,7 +299,7 @@ function Reply() {
                         <li>
                             <h2>ER 提案</h2>
                             <div className="er-hearing template">
-                                大変恐れ入りますが、現状 Anaqua では [Description] 機能はご用意しておりません。<br /><br />
+                                大変恐れ入りますが、現状 [Description] 機能はご用意しておりません。<br /><br />
 
                                 ご希望に沿うご案内ができず大変恐縮ですが、ご希望の機能を当サポートにて機能拡張（ER、Enhancement Request）として提出することも可能でございます。<br />
                                 そうすることで今後のバージョンアップに伴い、機能として実装される可能性がございます。<br /><br />
@@ -311,9 +311,9 @@ function Reply() {
                         <li>
                             <h2>ER 提出完了</h2>
                             <div className="er-done template">
-                                ご要望の機能は管理番号 [P-number] として ER を提出させていただきました。<br /><br />
+                                ご要望の機能は管理番号 [PNumber] として ER を提出させていただきました。<br /><br />
 
-                                なお、ER の採用可否の評価と決定、および採用される場合の実現時期の決定は、Anaqua 単独で行います。<br />
+                                なお、ER の採用可否の評価と決定、および採用される場合の実現時期の決定は、弊社単独で行います。<br />
                                 恐れ入りますが、お客様からのエスカレーションは承っておりませんので、ご理解およびご了承ください。<br /><br />
 
                                 それでは上記のご報告をもちまして、このチケットのステータスを SOLVED-Filed for Future Consideration といたします。<br />
@@ -334,32 +334,13 @@ function Reply() {
                             <button className="copy-raise-tfs aside-button">Copy</button>
                         </li>
                         <li>
-                            <h2>HyperViewリセット済み</h2>
+                            <h2>サービスリセット済み</h2>
                             <div className="reset-hv template">
-                                HyperView をリセットいたしました。<br /><br />
+                                [ServiceName] をリセットいたしました。<br /><br />
                                 お手数ですが、一度ログアウトしていただき、再ログインしてからダッシュボードがロードされているかをご確認お願いいたします。<br />
                                 ※ロードに時間がかかる場合もございます。
                             </div>
                             <button className="copy-reset-hv aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>Upgrade Step1. Email Matt</h2>
-                            <div className="upgrade-matt template">
-                                @Matt Zinner<br /> 
-                                Hi Matt, <br /><br />
-                                
-                                Thank you for addressing our clients&apos; upgrade requests.<br />
-                                [Clientname] requests AQX upgrade. <br />
-                                Could you please check the request? <br /><br />
-                                
-                                Environment: [Production/QA]<br />
-                                Current Client Version: [Version]<br />
-                                Requested version: [Version]<br /><br />
-                                
-                                Best Regards,<br />
-                                [Name]
-                            </div>
-                            <button className="copy-upgrade-matt aside-button">Copy</button>
                         </li>
                     </ul>
                 </div>
