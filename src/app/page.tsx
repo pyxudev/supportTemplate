@@ -1,14 +1,7 @@
 "use client"
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import '@/app/style/pagestyle.css';
 import "@/app/style/tabstyle.css"
-
-export const TabContext = createContext(
-    {} as {
-        activeTab: string;
-        setActiveTab: React.Dispatch<React.SetStateAction<string>>;
-    },
-);
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('tab1');
@@ -128,7 +121,7 @@ export default function Home() {
     }
 
     return (
-        <TabContext.Provider value={{ activeTab, setActiveTab }}>
+        <>
             <ul>
                 <li>
                     <div className={`MemoTab tab ${activeTab === 'tab1' && 'selected'}`} onClick={() => setActiveTab('tab1')}>
@@ -143,7 +136,7 @@ export default function Home() {
             </ul>
             {<div style={{display: activeTab === 'tab1' ? 'block':'none'}}><Memo /></div>}
             {<div style={{display: activeTab === 'tab2' ? 'block':'none'}}><Reply /></div>}
-        </TabContext.Provider>
+        </>
     );
 }
 
