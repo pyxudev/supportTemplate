@@ -8,12 +8,15 @@ textarea {
 }
 #memo-textarea1 {
     max-height:40vh;
+    padding: 5px;
 }
 #memo-textarea2 {
     max-height:15vh;
+    padding: 5px;
 }
 #memo-textarea3 {
     max-height:15vh;
+    padding: 5px;
 }
 #clientname {
     width: 80px;
