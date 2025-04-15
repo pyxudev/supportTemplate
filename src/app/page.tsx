@@ -212,7 +212,7 @@ function Reply() {
         }
         if (isEn.checked) {
             copyText = intcom + "Hello " + name.value + ",\n\n" + 'Thank you for reaching out to us regarding the issue.\n\n' 
-            + answer.value + "\n\nIf you have any further question, please feel free to const us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
+            + answer.value + "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
         } else {
             copyText = intcom + name.value + " 様\n\n" + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greeting.value + "\n\n" + answer.value + "\n\nご不明な点等ございましたらお知らせください。\n何卒よろしくお願いいたします。\n\n" + spname.value;
         }
