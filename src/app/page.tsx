@@ -179,7 +179,10 @@ function Memo() {
                     <textarea typeof="text" className="memo-text" id='memo-textarea1'></textarea>
                 </li>
                 <li>
-                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                    <label form="disable1">
+                        Disabled:
+                        <input type="checkbox" className="isDisabled" id="disable1" name="isDisabled" />
+                    </label>
                 </li>
             </ul>
             <ul className="memo-section">
@@ -188,7 +191,10 @@ function Memo() {
                     <textarea typeof="text" className="memo-text" id='memo-textarea2'></textarea>
                 </li>
                 <li>
-                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                    <label form="disable2">
+                        Disabled:
+                        <input type="checkbox" className="isDisabled" id="disable2" name="isDisabled" />
+                    </label>
                 </li>
             </ul>
             <ul className="memo-section">
@@ -197,7 +203,10 @@ function Memo() {
                     <textarea typeof="text" className="memo-text" id='memo-textarea3'></textarea>
                 </li>
                 <li>
-                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                    <label form="disable2">
+                        Disabled:
+                        <input type="checkbox" className="isDisabled" id="disable2" name="isDisabled" />
+                    </label>
                 </li>
             </ul>
             <div className="funcBtn">

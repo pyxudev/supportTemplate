@@ -18,6 +18,22 @@ textarea {
     max-height:15vh;
     padding: 5px;
 }
+label {
+    font-size: 25px;
+}
+label:hover {
+    cursor: pointer;
+}
+label input[type="checkbox"] {
+    width: 25px;
+    height: 25px;
+}
+label input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+label input[type="checkbox"]:checked {
+    background-color: #000;
+}
 #clientname {
     width: 80px;
 }
