@@ -19,6 +19,9 @@ textarea {
     padding: 5px;
 }
 label {
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
     font-size: 25px;
 }
 label:hover {
