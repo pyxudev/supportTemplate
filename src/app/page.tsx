@@ -149,11 +149,22 @@ function Memo() {
     }
     function memoCopyFunc() {
         let copyText = "#### [Internal Investigating Memo]\n";
-        const textArea = document.getElementsByTagName("textarea");
-        const textList = ["#### Investigations:", "#### Considerations:", "#### Conclusion and next steps:"];
-        for (let i = 0; i< 3; i++) {
-            copyText += textList[i] + "\n" + textArea[i].value + "\n";
+        const textArea = document.getElementsByClassName("memo-section");
+        for (let i = 0; i < textArea.length; i++) {
+            const isDisable = textArea[i].getElementsByClassName("isDisabled")[0] as HTMLInputElement;
+            if (isDisable.checked) {
+                continue;
+            }
+            const title = textArea[i].getElementsByClassName("title")[0] as HTMLHeadingElement;
+            const textarea = textArea[i].getElementsByClassName("memo-text")[0] as HTMLTextAreaElement;
+            copyText += title.innerText + "\n" + textarea.value + "\n";
         }
+        // const textArea = document.getElementsByTagName("textarea");
+
+        // const textList = ["#### Investigations:", "#### Considerations:", "#### Conclusion and next steps:"];
+        // for (let i = 0; i< 3; i++) {
+        //     copyText += textList[i] + "\n" + textArea[i].value + "\n";
+        // }
         navigator.clipboard.writeText(copyText);
     }
     return(
@@ -162,12 +173,33 @@ function Memo() {
             <h2 className='title'>[Internal Investigating Memo]</h2>
         </div>
         <div className="memo-tab-contents">
-            <h4>Investigations:</h4>
-            <textarea typeof="text" id="memo-textarea1"></textarea>
-            <h4>Considerations:</h4>
-            <textarea typeof="text" id="memo-textarea2"></textarea>
-            <h4>Conclusion and next steps:</h4>
-            <textarea typeof="text" id="memo-textarea3"></textarea>
+            <ul className="memo-section">
+                <h4 className='title'>Investigations:</h4>
+                <li>
+                    <textarea typeof="text" className="memo-text" id='memo-textarea1'></textarea>
+                </li>
+                <li>
+                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                </li>
+            </ul>
+            <ul className="memo-section">
+                <h4 className='title'>Considerations:</h4>
+                <li>
+                    <textarea typeof="text" className="memo-text" id='memo-textarea2'></textarea>
+                </li>
+                <li>
+                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                </li>
+            </ul>
+            <ul className="memo-section">
+                <h4 className='title'>Conclusion and next steps:</h4>
+                <li>
+                    <textarea typeof="text" className="memo-text" id='memo-textarea3'></textarea>
+                </li>
+                <li>
+                    Disabled:<input type="checkbox" className="isDisabled" name="isDisabled" />
+                </li>
+            </ul>
             <div className="funcBtn">
                 <ul>
                     <li>
