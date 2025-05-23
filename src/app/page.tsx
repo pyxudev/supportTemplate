@@ -11,6 +11,7 @@ export default function Home() {
             const invstp = localStorage.getItem('invstp');
             const cosd = localStorage.getItem('cosd');
             const nxtstp = localStorage.getItem('nxtstp');
+            const isDisabled = document.getElementsByClassName("memo-isDisabled");
 
             const lsname = localStorage.getItem('usrname');
             const lscompname = localStorage.getItem('compname');
@@ -20,6 +21,7 @@ export default function Home() {
             const lsuse = localStorage.getItem('use');
             const lsisEn = localStorage.getItem('isEn');
             const lsspname = localStorage.getItem('spname');
+            const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
 
             const step1: HTMLInputElement = document.getElementById("memo-textarea1") as HTMLInputElement;
             const step2: HTMLInputElement = document.getElementById("memo-textarea2") as HTMLInputElement;
@@ -43,6 +45,12 @@ export default function Home() {
             if (nxtstp) {
                 step3.value = nxtstp;
             }
+            for (let i = 0; i < isDisabled.length; i++) {
+                const disableCheck = isDisabled[i] as HTMLInputElement;
+                if (localStorage.getItem(disableCheck.id) == "true") {
+                    disableCheck.checked = true;
+                }
+            }
             if (lsname) {
                 name.value = lsname;
             }
@@ -57,6 +65,11 @@ export default function Home() {
             }
             if (lsanswer) {
                 answer.value = lsanswer;
+            }
+            if (isDisabledSelect) {
+                if (localStorage.getItem('greeting-select-disable') == "true") {
+                    isDisabledSelect.checked = true;
+                }
             }
             if (lsuse == "true") {
                 use.checked = true;
@@ -73,10 +86,12 @@ export default function Home() {
             const invstp = document.getElementsByTagName("textarea")[0].value;
             const cosd = document.getElementsByTagName("textarea")[1].value;
             const nxtstp = document.getElementsByTagName("textarea")[2].value;
+            const isDisabled = document.getElementsByClassName("memo-isDisabled");
             const name = document.getElementById("clientname") as HTMLInputElement;
             const compname = document.getElementById("compname") as HTMLInputElement;
             const simpname = document.getElementById("simpname") as HTMLInputElement;
             const greeting = document.getElementById("greeting") as HTMLInputElement;
+            const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
             const answer = document.getElementById("answer") as HTMLInputElement;
             const use = document.getElementById("use") as HTMLInputElement;
             const isEn = document.getElementById("isEn") as HTMLInputElement;
@@ -85,12 +100,22 @@ export default function Home() {
             localStorage.setItem('invstp', invstp);
             localStorage.setItem('cosd', cosd);
             localStorage.setItem('nxtstp', nxtstp);
+            for (let i = 0; i < isDisabled.length; i++) {
+                const disableCheck = isDisabled[i] as HTMLInputElement;
+                if (disableCheck.checked) {
+                    localStorage.setItem(disableCheck.id, "true");
+                }
+                else {
+                    localStorage.setItem(disableCheck.id, "false");
+                }
+            }
             
             localStorage.setItem('usrname', name.value);
             localStorage.setItem('compname', compname.value);
             localStorage.setItem('simpname', simpname.value);
             localStorage.setItem('greeting', greeting.value);
             localStorage.setItem('answer', answer.value);
+            
             if (use.checked) {
                 localStorage.setItem('use', "true");
             }
@@ -102,6 +127,12 @@ export default function Home() {
             }
             else {
                 localStorage.setItem('isEn', "false");
+            }
+            if (isDisabledSelect.checked) {
+                localStorage.setItem('greeting-select-disable', "true");
+            }
+            else {
+                localStorage.setItem('greeting-select-disable', "false");
             }
             localStorage.setItem('spname', spname.value);
         });
@@ -146,12 +177,17 @@ function Memo() {
         textareas.forEach(textarea => {
             textarea.value = '';
         });
+        const isDisabled = document.getElementsByClassName("memo-isDisabled");
+        for (let i = 0; i < isDisabled.length; i++) {
+            const disableCheck = isDisabled[i] as HTMLInputElement;
+            disableCheck.checked = false;
+        }
     }
     function memoCopyFunc() {
         let copyText = "#### [Internal Investigating Memo]\n";
         const textArea = document.getElementsByClassName("memo-section");
         for (let i = 0; i < textArea.length; i++) {
-            const isDisable = textArea[i].getElementsByClassName("isDisabled")[0] as HTMLInputElement;
+            const isDisable = textArea[i].getElementsByClassName("memo-isDisabled")[0] as HTMLInputElement;
             if (isDisable.checked) {
                 continue;
             }
@@ -159,12 +195,6 @@ function Memo() {
             const textarea = textArea[i].getElementsByClassName("memo-text")[0] as HTMLTextAreaElement;
             copyText += title.innerText + "\n" + textarea.value + "\n";
         }
-        // const textArea = document.getElementsByTagName("textarea");
-
-        // const textList = ["#### Investigations:", "#### Considerations:", "#### Conclusion and next steps:"];
-        // for (let i = 0; i< 3; i++) {
-        //     copyText += textList[i] + "\n" + textArea[i].value + "\n";
-        // }
         navigator.clipboard.writeText(copyText);
     }
     return(
@@ -180,8 +210,7 @@ function Memo() {
                 </li>
                 <li>
                     <label form="disable1">
-                        Disabled:
-                        <input type="checkbox" className="isDisabled" id="disable1" name="isDisabled" />
+                        Disable<input type="checkbox" className="memo-isDisabled" id="disable1" name="isDisabled" />
                     </label>
                 </li>
             </ul>
@@ -192,8 +221,7 @@ function Memo() {
                 </li>
                 <li>
                     <label form="disable2">
-                        Disabled:
-                        <input type="checkbox" className="isDisabled" id="disable2" name="isDisabled" />
+                        Disable<input type="checkbox" className="memo-isDisabled" id="disable2" name="isDisabled" />
                     </label>
                 </li>
             </ul>
@@ -203,9 +231,8 @@ function Memo() {
                     <textarea typeof="text" className="memo-text" id='memo-textarea3'></textarea>
                 </li>
                 <li>
-                    <label form="disable2">
-                        Disabled:
-                        <input type="checkbox" className="isDisabled" id="disable2" name="isDisabled" />
+                    <label form="disable3">
+                        Disable<input type="checkbox" className="memo-isDisabled" id="disable3" name="isDisabled" />
                     </label>
                 </li>
             </ul>
@@ -230,12 +257,17 @@ function Reply() {
         const answer = document.getElementById("answer") as HTMLInputElement;
         const use = document.getElementById("use") as HTMLInputElement;
         const isEn = document.getElementById("isEn") as HTMLInputElement;
+        const isDisabled = document.getElementsByClassName("reply-isDisabled");
 
         name.value = "";
         greeting.value = "お問い合わせいただき、誠にありがとうございます。";
         answer.value = "";
         use.checked = false;
         isEn.checked = false;
+        for (let i = 0; i < isDisabled.length; i++) {
+            const disableCheck = isDisabled[i] as HTMLInputElement;
+            disableCheck.checked = false;
+        }
     }
     function replyCopyFunc() {
         const name = document.getElementById("clientname") as HTMLInputElement;
@@ -246,16 +278,27 @@ function Reply() {
         const use = document.getElementById("use") as HTMLInputElement;
         const isEn = document.getElementById("isEn") as HTMLInputElement;
         const spname = document.getElementById("spname") as HTMLInputElement;
+        const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
+        let clientName = "";
+        let greetingText = "\n";
         let intcom = "";
         let copyText = "";
         if (use.checked) {
             intcom = "#### [Internal Comment for review]\n";
         }
+         if (!isDisabledSelect.checked) {
+            greetingText = greeting.value  + "\n\n";
+        }
         if (isEn.checked) {
-            copyText = intcom + "Hello " + name.value + ",\n\n" + 'Thank you for reaching out to us regarding the issue.\n\n' 
-            + answer.value + "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
+            if (name.value == "") {
+                window.alert("Please enter the client name.");
+            }
+            copyText = intcom + "Hello " + name.value + ",\n\n" + 'Thank you for reaching out to us regarding the issue.\n\n' + answer.value + "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
         } else {
-            copyText = intcom + name.value + " 様\n\n" + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greeting.value + "\n\n" + answer.value + "\n\nご不明な点等ございましたらお知らせください。\n何卒よろしくお願いいたします。\n\n" + spname.value;
+            if (name.value != "") {
+                clientName = name.value + " 様\n\n"
+            }
+            copyText = intcom + clientName + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greetingText + answer.value + "\n\nご不明な点等ございましたらお知らせください。\n何卒よろしくお願いいたします。\n\n" + spname.value;
         }
 
         navigator.clipboard.writeText(copyText);
@@ -268,22 +311,27 @@ function Reply() {
         </div>
         <div className="reply-tab-contents">
             <div className="maintemp">
-                <div className="greeting">
-                    <input type="text" id="clientname" name="clientname" />　様
+                <div className="greeting greeting-name">
+                    <p><input type="text" id="clientname" name="clientname" />様</p>
                 </div>
-                <br />
-                <div className="greeting">
-                    いつもお世話になっております、<input type="text" id="compname"/> サポートの<input type="text" id="simpname"/>です。
+                <div className='greeting greeting1'>
+                    <p>いつもお世話になっております、<input type="text" id="compname"/> サポートの<input type="text" id="simpname"/>です。</p>
                 </div>
-                <select name="greeting" id="greeting">
-                    <option>お問い合わせいただき、誠にありがとうございます。</option>
-                    <option>前回のご案内内容を確認いただき、誠にありがとうございます。</option>
-                    <option>調査にお時間をいただき、誠にありがとうございます。</option>
-                    <option>ご対応いただき、誠にありがとうございます。</option>
-                </select>
+                <div className='greeting greeting-select'>
+                    <select name="greeting" id="greeting">
+                        <option>お問い合わせいただき、誠にありがとうございます。</option>
+                        <option>前回のご案内内容を確認いただき、誠にありがとうございます。</option>
+                        <option>調査にお時間をいただき、誠にありがとうございます。</option>
+                        <option>ご対応いただき、誠にありがとうございます。</option>
+                    </select>
+                    <label htmlFor="greeting-select-disable">
+                        Disabled:
+                        <input type="checkbox" className="reply-isDisabled" id="greeting-select-disable" name="isDisabled" />
+                    </label>
+                </div>
                 <textarea className="textarea" id="answer" typeof="text"></textarea>
-                ご不明な点等ございましたらお知らせください。<br />
-                何卒よろしくお願いいたします。<br />
+                <p>ご不明な点等ございましたらお知らせください。</p>
+                <p>何卒よろしくお願いいたします。</p>
                 <div className="signature">
                     エンジニア名：<input typeof="text" id="spname" name="spname"/><br />
                 </div>
@@ -296,11 +344,12 @@ function Reply() {
                             <button onClick={() => replyCopyFunc()}>copy</button>
                         </li>
                         <li className="checkbox">
-                            <input type="checkbox" id="use" name="use" />
-                            <label htmlFor="use">Internal Comment for review</label>
-                            <br />
-                            <input type="checkbox" id="isEn" name="isEn" />
-                            <label htmlFor="isEn">English</label>
+                            <label htmlFor="use">
+                                <input type="checkbox" id="use" name="use" />Internal Comment for review
+                            </label>
+                            <label htmlFor="isEn">
+                                <input type="checkbox" id="isEn" name="isEn" />English
+                            </label>
                         </li>
                     </ul>
                 </div>

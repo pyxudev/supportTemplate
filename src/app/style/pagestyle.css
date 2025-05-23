@@ -52,9 +52,23 @@ input[type="text"] {
     padding: 3px;
     display: flex;
 }
-.greeting {
+input {
+    display: inline-flex;
+}
+.greeting p {
+    float: left;
     display: flex;
+}
+.greeting label {
+    float: right;
+}
+.greeting {
+    overflow: auto;
     margin-top: 5px;
+    align-items: center
+}
+.greeting label {
+    text-align: right;
 }
 #greeting {
     margin: 10px 0;
@@ -115,4 +129,7 @@ button:hover {
 }
 .aside-button {
     width: 100%;
+}
+.checkbox {
+    display: grid;
 }
