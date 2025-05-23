@@ -21,7 +21,6 @@ export default function Home() {
             const lsuse = localStorage.getItem('use');
             const lsisEn = localStorage.getItem('isEn');
             const lsspname = localStorage.getItem('spname');
-            const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
 
             const step1: HTMLInputElement = document.getElementById("memo-textarea1") as HTMLInputElement;
             const step2: HTMLInputElement = document.getElementById("memo-textarea2") as HTMLInputElement;
@@ -31,7 +30,9 @@ export default function Home() {
             const compname = document.getElementById("compname") as HTMLInputElement;
             const simpname = document.getElementById("simpname") as HTMLInputElement;
             const greeting = document.getElementById("greeting") as HTMLInputElement;
+            const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
             const answer = document.getElementById("answer") as HTMLInputElement;
+            const isDisabledUnclear = document.getElementById("unclear") as HTMLInputElement;
             const use = document.getElementById("use") as HTMLInputElement;
             const isEn = document.getElementById("isEn") as HTMLInputElement;
             const spname = document.getElementById("spname") as HTMLInputElement;
@@ -71,6 +72,11 @@ export default function Home() {
                     isDisabledSelect.checked = true;
                 }
             }
+            if (isDisabledUnclear) {
+                if (localStorage.getItem('unclear') == "true") {
+                    isDisabledUnclear.checked = true;
+                }
+            }
             if (lsuse == "true") {
                 use.checked = true;
             }
@@ -93,9 +99,10 @@ export default function Home() {
             const greeting = document.getElementById("greeting") as HTMLInputElement;
             const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
             const answer = document.getElementById("answer") as HTMLInputElement;
+            const isDisabledUnclear = document.getElementById("unclear") as HTMLInputElement;
+            const spname = document.getElementById("spname") as HTMLInputElement;
             const use = document.getElementById("use") as HTMLInputElement;
             const isEn = document.getElementById("isEn") as HTMLInputElement;
-            const spname = document.getElementById("spname") as HTMLInputElement;
 
             localStorage.setItem('invstp', invstp);
             localStorage.setItem('cosd', cosd);
@@ -115,7 +122,7 @@ export default function Home() {
             localStorage.setItem('simpname', simpname.value);
             localStorage.setItem('greeting', greeting.value);
             localStorage.setItem('answer', answer.value);
-            
+                        
             if (use.checked) {
                 localStorage.setItem('use', "true");
             }
@@ -133,6 +140,12 @@ export default function Home() {
             }
             else {
                 localStorage.setItem('greeting-select-disable', "false");
+            }
+            if (isDisabledUnclear.checked) {
+                localStorage.setItem('unclear', "true");
+            }
+            else {
+                localStorage.setItem('unclear', "false");
             }
             localStorage.setItem('spname', spname.value);
         });
@@ -257,17 +270,17 @@ function Reply() {
         const answer = document.getElementById("answer") as HTMLInputElement;
         const use = document.getElementById("use") as HTMLInputElement;
         const isEn = document.getElementById("isEn") as HTMLInputElement;
-        const isDisabled = document.getElementsByClassName("reply-isDisabled");
+        const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
+        const isDisabledUnclear = document.getElementById("unclear") as HTMLInputElement;
+        
 
         name.value = "";
         greeting.value = "お問い合わせいただき、誠にありがとうございます。";
         answer.value = "";
         use.checked = false;
         isEn.checked = false;
-        for (let i = 0; i < isDisabled.length; i++) {
-            const disableCheck = isDisabled[i] as HTMLInputElement;
-            disableCheck.checked = false;
-        }
+        isDisabledSelect.checked = false;
+        isDisabledUnclear.checked = false;
     }
     function replyCopyFunc() {
         const name = document.getElementById("clientname") as HTMLInputElement;
@@ -279,10 +292,12 @@ function Reply() {
         const isEn = document.getElementById("isEn") as HTMLInputElement;
         const spname = document.getElementById("spname") as HTMLInputElement;
         const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
+        const isDisabledUnclear = document.getElementById("unclear") as HTMLInputElement;
         let clientName = "";
         let greetingText = "\n";
         let intcom = "";
         let copyText = "";
+        let unclearText = "";
         if (use.checked) {
             intcom = "#### [Internal Comment for review]\n";
         }
@@ -298,7 +313,10 @@ function Reply() {
             if (name.value != "") {
                 clientName = name.value + " 様\n\n"
             }
-            copyText = intcom + clientName + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greetingText + answer.value + "\n\nご不明な点等ございましたらお知らせください。\n何卒よろしくお願いいたします。\n\n" + spname.value;
+            if (!isDisabledUnclear.checked){
+                unclearText = "\n\nご不明な点等ございましたらお知らせください。"
+            }
+            copyText = intcom + clientName + "いつもお世話になっております、" + compname.value + " サポートの" + simpname.value + "です。\n" + greetingText + answer.value + unclearText + "\n\n何卒よろしくお願いいたします。\n" + spname.value;
         }
 
         navigator.clipboard.writeText(copyText);
@@ -330,7 +348,12 @@ function Reply() {
                     </label>
                 </div>
                 <textarea className="textarea" id="answer" typeof="text"></textarea>
-                <p>ご不明な点等ございましたらお知らせください。</p>
+                <div className='unclear'>
+                    <p>ご不明な点等ございましたらお知らせください。</p>
+                    <label htmlFor="unclear">
+                        Disabled:<input type="checkbox" className="reply-isDisabled" id="unclear" name="isDisabled" />
+                    </label>
+                </div>
                 <p>何卒よろしくお願いいたします。</p>
                 <div className="signature">
                     エンジニア名：<input typeof="text" id="spname" name="spname"/><br />

@@ -55,14 +55,14 @@ input[type="text"] {
 input {
     display: inline-flex;
 }
-.greeting p {
+.greeting p, .unclear p {
     float: left;
     display: flex;
 }
-.greeting label {
+.greeting label, .unclear label {
     float: right;
 }
-.greeting {
+.greeting, .unclear {
     overflow: auto;
     margin-top: 5px;
     align-items: center
