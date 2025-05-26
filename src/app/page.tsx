@@ -306,12 +306,12 @@ function Reply() {
                 window.alert("Please enter the client name.");
             }
             if (!isDisabledSelect.checked) {
-                greetingText = "Thank you for reaching out to us regarding the issue.\n\n"
+                greetingText = "\nThank you for reaching out to us regarding the issue.\n\n"
             }
             if (!isDisabledUnclear.checked){
                 unclearText = "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation."
             }
-            copyText = intcom + "Hello " + name.value + ",\n\n" + greetingText + answer.value + unclearText + "\n\nBest regards,\n" + spname.value;
+            copyText = intcom + "Hello " + name.value + ",\n" + greetingText + answer.value + unclearText + "\n\nBest regards,\n" + spname.value;
         } else {
             if (name.value != "") {
                 clientName = name.value + " 様\n\n"
