@@ -301,17 +301,23 @@ function Reply() {
         if (use.checked) {
             intcom = "#### [Internal Comment for review]\n";
         }
-         if (!isDisabledSelect.checked) {
-            greetingText = greeting.value  + "\n\n";
-        }
         if (isEn.checked) {
             if (name.value == "") {
                 window.alert("Please enter the client name.");
             }
-            copyText = intcom + "Hello " + name.value + ",\n\n" + 'Thank you for reaching out to us regarding the issue.\n\n' + answer.value + "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation.\n\nBest regards,\n" + spname.value;
+            if (!isDisabledSelect.checked) {
+                greetingText = "Thank you for reaching out to us regarding the issue.\n\n"
+            }
+            if (!isDisabledUnclear.checked){
+                unclearText = "\n\nIf you have any further question, please feel free to let us know.\nThank you for your cooperation."
+            }
+            copyText = intcom + "Hello " + name.value + ",\n\n" + greetingText + answer.value + unclearText + "\n\nBest regards,\n" + spname.value;
         } else {
             if (name.value != "") {
                 clientName = name.value + " 様\n\n"
+            }
+            if (!isDisabledSelect.checked) {
+                greetingText = greeting.value  + "\n\n";
             }
             if (!isDisabledUnclear.checked){
                 unclearText = "\n\nご不明な点等ございましたらお知らせください。"
