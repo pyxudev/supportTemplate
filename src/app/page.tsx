@@ -86,6 +86,27 @@ export default function Home() {
             if (lsspname) {
                 spname.value = lsspname;
             }
+
+            async function template() {
+                const ul = document.querySelector("#template-list") as HTMLUListElement;
+                const res = await fetch('/api/template',
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "x-forwarded-proto": "https"
+                    }
+                });
+                const data = await res.json();
+                const templates = data["templates"];
+                for (const template of templates) {
+                    const title = template["title"];
+                    const content = template["content"].replace(/\\n/g, "<br />");
+                    const li = "<li>" + "<h2>" + title + "</h2>" + "<div className='template'>" + content + "</div>" + "<button className='side-copy-button'>Copy</button>" + "</li>";
+                    ul.innerHTML += li;
+                }
+            }
+            template();
         }
 
         window.addEventListener('beforeunload', function() {
@@ -150,7 +171,7 @@ export default function Home() {
             localStorage.setItem('spname', spname.value);
         });
 
-        const copybuttons = document.getElementsByClassName('aside-button');
+        const copybuttons = document.getElementsByClassName('side-copy-button');
         for ( let i=0; i<copybuttons.length; i++) {
             copybuttons[i].addEventListener('click', function(event) {
                 if (event.target){                    
@@ -273,7 +294,6 @@ function Reply() {
         const isDisabledSelect = document.getElementById("greeting-select-disable") as HTMLInputElement;
         const isDisabledUnclear = document.getElementById("unclear") as HTMLInputElement;
         
-
         name.value = "";
         greeting.value = "お問い合わせいただき、誠にありがとうございます。";
         answer.value = "";
@@ -366,16 +386,20 @@ function Reply() {
                 </div>
                 <div className="funcBtn">
                     <ul>
-                        <li>
+                        <li className="reply-button">
                             <button onClick={() => replyClearFunc()}>clear</button>
                         </li>
-                        <li>
+                        <li className="reply-button">
                             <button onClick={() => replyCopyFunc()}>copy</button>
                         </li>
-                        <li className="checkbox">
+                    </ul>
+                    <ul>
+                        <li className="reply-checkbox">
                             <label htmlFor="use">
                                 <input type="checkbox" id="use" name="use" />Internal Comment for review
                             </label>
+                        </li>
+                        <li className="reply-checkbox">
                             <label htmlFor="isEn">
                                 <input type="checkbox" id="isEn" name="isEn" />English
                             </label>
@@ -385,75 +409,7 @@ function Reply() {
             </div>
             <aside className="sidebar">
                 <div className="sidecontain">
-                    <ul>
-                        <li>
-                            <h2>認識の確認</h2>
-                            <div className="ask-for-confirm template">
-                                現在ご希望の機能の調査にあたって、以下の認識に相違がないかご確認お願いいたします。<br />
-                                - [Question]<br /><br />
-                                
-                                ご認識と齟齬がある場合はお知らせください。<br />
-                            </div>
-                            <button className="copy-ask-for-confirm aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>詳細情報質問</h2>
-                            <div className="ask-for-details template">
-                                現在ご提示のエラーについての調査にあたって、以下の情報をご提供お願いいたします。<br />
-                                1. 事象発生レコード：<br />
-                                2. 事象再現手順：<br />
-                                ※ログイン後の事象発生まで各画面での操作手順を可能な限り詳細にお願いいたします。<br /><br />
-                                
-                                大変お手数ですが、より正確な回答をするために上記情報をご提示いただけますと幸いです。
-                            </div>
-                            <button className="copy-ask-for-details aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>ER 提案</h2>
-                            <div className="er-hearing template">
-                                大変恐れ入りますが、現状 [Description] 機能はご用意しておりません。<br /><br />
-
-                                ご希望に沿うご案内ができず大変恐縮ですが、ご希望の機能を当サポートにて機能拡張（ER、Enhancement Request）として提出することも可能でございます。<br />
-                                そうすることで今後のバージョンアップに伴い、機能として実装される可能性がございます。<br /><br />
-                                
-                                ご希望の際は遠慮なくお申し付けください。
-                            </div>
-                            <button className="copy-er-hearing aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>ER 提出完了</h2>
-                            <div className="er-done template">
-                                ご要望の機能は管理番号 [PNumber] として ER を提出させていただきました。<br /><br />
-
-                                なお、ER の採用可否の評価と決定、および採用される場合の実現時期の決定は、弊社単独で行います。<br />
-                                恐れ入りますが、お客様からのエスカレーションは承っておりませんので、ご理解およびご了承ください。<br /><br />
-
-                                それでは上記のご報告をもちまして、このチケットのステータスを SOLVED-Filed for Future Consideration といたします。<br />
-                                貴重なご意見をいただき、ありがとうございました。
-                            </div>
-                            <button className="copy-er-done aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>TFS 登録完了</h2>
-                            <div className="copy-raise-tfs template">
-                                この度はご不便をおかけして大変申し訳ございません。<br /><br />
-
-                                本件は TFS 管理番号 [BUGnumber] として登録させていただきました。<br />
-                                担当者から返答いただき次第ご報告いたします。<br /><br />
-
-                                大変恐縮ですが、今しばらくお待いただくようお願い申し上げます。
-                            </div>
-                            <button className="copy-raise-tfs aside-button">Copy</button>
-                        </li>
-                        <li>
-                            <h2>サービスリセット済み</h2>
-                            <div className="reset-hv template">
-                                [ServiceName] をリセットいたしました。<br /><br />
-                                お手数ですが、一度ログアウトしていただき、再ログインしてからダッシュボードがロードされているかをご確認お願いいたします。<br />
-                                ※ロードに時間がかかる場合もございます。
-                            </div>
-                            <button className="copy-reset-hv aside-button">Copy</button>
-                        </li>
+                    <ul id="template-list">
                     </ul>
                 </div>
             </aside>
