@@ -1,7 +1,12 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import '@/app/style/pagestyle.css';
 import "@/app/style/tabstyle.css"
+
+type Template = {
+    title: string;
+    content: string;
+};
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('tab1');
@@ -86,27 +91,6 @@ export default function Home() {
             if (lsspname) {
                 spname.value = lsspname;
             }
-
-            async function template() {
-                const ul = document.querySelector("#template-list") as HTMLUListElement;
-                const res = await fetch('/api/template',
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "x-forwarded-proto": "https"
-                    }
-                });
-                const data = await res.json();
-                const templates = data["templates"];
-                for (const template of templates) {
-                    const title = template["title"];
-                    const content = template["content"].replace(/\\n/g, "<br />");
-                    const li = "<li>" + "<h2>" + title + "</h2>" + "<div className='template'>" + content + "</div>" + "<button className='side-copy-button'>Copy</button>" + "</li>";
-                    ul.innerHTML += li;
-                }
-            }
-            template();
         }
 
         window.addEventListener('beforeunload', function() {
@@ -170,19 +154,6 @@ export default function Home() {
             }
             localStorage.setItem('spname', spname.value);
         });
-
-        const copybuttons = document.getElementsByClassName('side-copy-button');
-        for ( let i=0; i<copybuttons.length; i++) {
-            copybuttons[i].addEventListener('click', function(event) {
-                if (event.target){                    
-                    const target = event.target as HTMLElement;
-                    const li = target.parentNode;
-                    const templates = li?.querySelector('.template') as HTMLElement;
-                    const template = templates.innerText;
-                    navigator.clipboard.writeText(template);
-                }
-            });
-        }
     }
 
     return (
@@ -348,6 +319,29 @@ function Reply() {
         navigator.clipboard.writeText(copyText);
     }
 
+    // Fetch templates from the server
+    const [templates, setTemplates] = useState<Template[]>([]);
+    useEffect(() => {
+        async function template() {
+            const res = await fetch('/api/template',
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-forwarded-proto": "https"
+                }
+            });
+            const data = await res.json();
+            setTemplates(data.templates);
+        }
+        template();
+    }, []);
+    // Function to handle copying template content
+    const handleCopy = (content: string) => {
+        const text = content.replace(/\\n/g, "\n"); 
+        navigator.clipboard.writeText(text);
+    }
+
     return(
     <div className="tab-contents">
         <div className="tab-title">
@@ -410,6 +404,17 @@ function Reply() {
             <aside className="sidebar">
                 <div className="sidecontain">
                     <ul id="template-list">
+                        <ul id="template-list">
+                            {templates.map((template, index) => (
+                                <li key={index}>
+                                <h2>{template.title}</h2>
+                                <div className="template" dangerouslySetInnerHTML={{ __html: template.content.replace(/\\n/g, "<br />") }} />
+                                <button className="side-copy-button" onClick={() => handleCopy(template.content)}>
+                                    Copy
+                                </button>
+                                </li>
+                            ))}
+                            </ul>
                     </ul>
                 </div>
             </aside>
