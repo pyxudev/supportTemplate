@@ -198,7 +198,7 @@ function Memo() {
             }
             const title = textArea[i].getElementsByClassName("title")[0] as HTMLHeadingElement;
             const textarea = textArea[i].getElementsByClassName("memo-text")[0] as HTMLTextAreaElement;
-            copyText += title.innerText + "\n" + textarea.value + "\n";
+            copyText += "### " + title.innerText + "\n" + textarea.value + "\n";
         }
         navigator.clipboard.writeText(copyText);
     }
