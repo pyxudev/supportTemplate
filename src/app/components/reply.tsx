@@ -152,6 +152,7 @@ const Reply = () => {
                 <div className='unclear'>
                     <select name="unclear" id="unclear" typeof="text" onChange={(e) => setRplyData({ ...rplyData, unclear: e.target.value })} value={rplyData.unclear}>
                         <option>ご不明な点等ございましたらお知らせください。</option>
+                        <option>上記手順より事象が解決されない場合はお知らせください。</option>
                         <option></option>
                     </select>
                 </div>
